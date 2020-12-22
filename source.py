@@ -1,16 +1,21 @@
+#KHU-CVProject_01-Improved_Stereo_Matching
+#Kwangwon Lee, 2016104142
+#Also in Github: https://github.com/ryanleek/CV_Stereo_Matching
+
 import numpy as np
 import matplotlib.pyplot as plt
 import os
 from cv2 import cv2
 
-#Name of folder where left and right img exists
+#Name of folder where left and right img exists(code and folder in same dir.)
 DATADIR = "sample"
 
-#Read left and right image in grayscale with cv2 [Modified from self-project tutorial_03(https://github.com/ryanleek/TensorFlow)]
+#Read left and right image in grayscale with cv2 
+#[Modified from self-project tutorial_03(https://github.com/ryanleek/TensorFlow)]
 L_array = cv2.imread(os.path.join(DATADIR, "left.png"), cv2.IMREAD_GRAYSCALE)
 R_array = cv2.imread(os.path.join(DATADIR, "right.png"), cv2.IMREAD_GRAYSCALE)
 
-#Optional code to resize image, ratio must be changed for dif. img
+#Optional code to resize image, shape ratio must be changed for dif. img
 #new_L_array = cv2.resize(L_array, (270,225))
 #new_R_array = cv2.resize(R_array, (270,225))
 
@@ -41,7 +46,7 @@ for k in range(0, NEW_H):
 
         for j in range(0, NEW_W):
 
-            R_patch = R_array[k:k+PATCHSIZE-1,j:j+PATCHSIZE-1]  #right patch
+            R_patch = R_array[k:k+PATCHSIZE-1, j:j+PATCHSIZE-1]  #right patch
             DSI[i+1,j+1] = np.sum((L_patch-R_patch)**2)  #use SSD for DSI value
 
     #Optional code to check DSI
@@ -97,7 +102,7 @@ for k in range(0, NEW_H):
            
             q = q-1
     
-    #Check if code is running
+    #Check if code is running [From Stereo Matching Sample code]
     print("!", end="", flush=True) 
 
 
